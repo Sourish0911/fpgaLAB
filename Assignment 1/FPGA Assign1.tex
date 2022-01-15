@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{circuitikz}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usetikzlibrary{positioning}
+
+\title{FPGA Assignment1}
+\author{EE22MTECH02002}
+\date{January 2022}
+
+\begin{document}
+
+\maketitle
+
+\section{Question}
+Differentiate Between Half adder and Full adder. Draw the Logic Diagram of full adder.
+
+\section{Answer}
+
+\begin{tabularx}{\textwidth} { | m{0.5cm} | m{5.3cm}| m{5cm} | }
+ \hline
+S. No. & HALF ADDER & FULL ADDER \\
+ \hline
+1. & The half adder produces a sum of the two inputs. & The full adder produces a sum of the three inputs and carry value. \\
+\hline
+2. &Previous carry is not used. & Previous carry is used. \\
+ \hline
+3. & It consists of one EX-OR gate and one AND gate. & It consists of two EX-OR, two AND gate and one OR gate. \\
+ \hline
+4. & Logical Expression for half adder is : S=A \oplus B;  C=A.B. & Logical Expression for Full adder is : S=A \oplus B \oplus Cin; Cout=(A.B)+(Cin.(A \oplus B)).\\
+ \hline
+ 
+\end{tabularx}
+
+
+\vspace{15pt}
+Full Adder Diagram.
+
+\begin{figure}[ht]
+   \centering 
+   \begin{circuitikz}[scale=1]
+   \draw (0,8) node[xor port](xor1){}
+(-4.25, 8.25) node[anchor=east] {A} %%input A
+(-4.25, 7.75) node[anchor=east] {B} %%input B
+(-4, 6.75) node[anchor=east] {$\text{C}_{in}$} %%input C_in
+(2, 7.5) node[xor port] (xor2){} 
+(xor2.out) node[anchor=west] {S}
+(2, 5.5) node[and port] (and1){}
+(2, 3.5) node[and port] (and2){}
+(4, 4.5) node[or port] (or){}
+(-4, 8.25) to[short, -*](-3, 8.25)-|(xor1.in 1)
+(-4, 7.75) to[short, -*](-2.5, 7.75)-|(xor1.in 2)
+(-4, 6.75) to[short, -*](0.6, 6.75)-|(and1.in 1)
+(0, 6.75)-|(xor2.in 2)
+(0, 8) to[short, -*](0.25, 8)-|(xor2.in 1)
+
+(0.25, 8)--(0.25, 5.25)-|(and1.in 2)
+(-3, 8.25)--(-3, 3.25)-|(and2.in 2)
+(-2.5, 7.75)--(-2.5, 3.75)-|(and2.in 1)
+(and1.out)-|(or.in 1)
+(and2.out)-|(or.in 2)
+(or.out) node[anchor=west]{$\text{C}_{out}$}
+;
+\end{circuitikz}
+\end{figure}
+
+\end{document}
